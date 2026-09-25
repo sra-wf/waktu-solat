@@ -3,66 +3,207 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Masjid Mappajaji</title>
+<title>Imam Mappajaji</title>
 <style>
-:root{--bg:#0b2a24;--panel:#123a32;--line:#2b5a4f;--ink:#f3ecd6;--dim:#a9c2b6;--gold:#e3b04b;--alert:#f7d774}
-html,body{height:100%;margin:0;background:var(--bg);color:var(--ink);font-family:Georgia,"Noto Serif","Times New Roman",serif;overflow:hidden;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
-body{display:grid;grid-template-rows:auto 1fr auto;padding:2.2vh 3vw;box-sizing:border-box;gap:2vh}
-header{display:flex;align-items:baseline;justify-content:space-between;border-bottom:2px solid var(--gold);padding-bottom:1.4vh}
-h1{margin:0;font-size:5.2vh;letter-spacing:.04em;font-weight:700}
-header span{font-size:2.6vh;color:var(--dim);font-style:italic}
+:root{
+  --bg:#0a2620;--bg2:#0e3129;--panel:#123a32;--line:#2b5a4f;
+  --ink:#f3ecd6;--dim:#a9c2b6;--gold:#e3b04b;--gold2:#f6d488;--alert:#f7d774;--iqomah:#e4713a;
+}
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;color:var(--ink);font-family:Georgia,"Noto Serif","Times New Roman",serif;overflow:hidden;
+  -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+body{
+  background:
+    radial-gradient(circle at 15% 10%, rgba(227,176,75,.10), transparent 40%),
+    radial-gradient(circle at 85% 90%, rgba(227,176,75,.08), transparent 45%),
+    repeating-conic-gradient(from 0deg, rgba(255,255,255,.015) 0deg 15deg, transparent 15deg 30deg),
+    linear-gradient(160deg,var(--bg),var(--bg2));
+  display:grid;grid-template-rows:auto 1fr auto;padding:2.2vh 3vw;gap:2vh;position:relative}
+header{display:flex;align-items:center;justify-content:space-between;border-bottom:2px solid var(--gold);padding-bottom:1.6vh;gap:2vw}
+.htitle{display:flex;align-items:center;gap:1.4vw}
+.hicon{width:5.6vh;height:5.6vh;flex:none}
+h1{margin:0;font-size:5vh;letter-spacing:.04em;font-weight:700;color:var(--gold2)}
+header .sub{font-size:2.4vh;color:var(--dim);font-style:italic;text-align:right}
 main{display:grid;grid-template-columns:1.15fr 1fr;gap:3vw;min-height:0}
-.left{display:flex;flex-direction:column;justify-content:center;gap:2vh}
-#clock{font-size:20vh;line-height:1;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.02em}
-#clock small{font-size:7vh;color:var(--dim);margin-left:1vw}
-#greg{font-size:3.6vh;color:var(--dim)}
-#hijri{font-size:6.4vh;color:var(--gold);font-weight:700;line-height:1.15}
-.next{margin-top:2vh;border-left:.8vh solid var(--gold);padding-left:2vw}
-.next .l{font-size:2.8vh;color:var(--dim)}
-.next .n{font-size:8vh;font-weight:700}
-.next .c{font-size:6vh;font-variant-numeric:tabular-nums;color:var(--gold)}
-ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;justify-content:center;gap:1.4vh}
-li{display:flex;justify-content:space-between;align-items:baseline;padding:1.6vh 2vw;background:var(--panel);border:1px solid var(--line);font-size:5.2vh}
-li b{font-variant-numeric:tabular-nums;font-size:6vh}
-li.minor{font-size:3.4vh;color:var(--dim);padding:.9vh 2vw}
-li.minor b{font-size:3.6vh}
-li.on{background:var(--gold);color:#1a2a20;border-color:var(--gold)}
-li.done{opacity:.45}
-footer{font-size:2.4vh;color:var(--dim);display:flex;justify-content:space-between}
-#ov{position:fixed;inset:0;background:rgba(6,26,21,.97);display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:3vh}
+.left{display:flex;flex-direction:column;justify-content:center;gap:1.6vh}
+#clock{font-size:19vh;line-height:1;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:.02em;text-shadow:0 0 6vh rgba(227,176,75,.18)}
+#clock small{font-size:6.6vh;color:var(--dim);margin-left:1vw}
+#greg{font-size:3.4vh;color:var(--dim)}
+#hijri{font-size:6vh;color:var(--gold);font-weight:700;line-height:1.15}
+.statusbox{margin-top:1.6vh;border-left:.8vh solid var(--gold);padding:1.2vh 2vw;border-radius:.6vh;background:rgba(0,0,0,.15);transition:border-color .3s}
+.statusbox.iqomah{border-color:var(--iqomah)}
+.statusbox .l{font-size:2.6vh;color:var(--dim)}
+.statusbox .n{font-size:7vh;font-weight:700}
+.statusbox .c{font-size:5.6vh;font-variant-numeric:tabular-nums;color:var(--gold)}
+.statusbox.iqomah .c{color:var(--iqomah)}
+ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;justify-content:center;gap:1.3vh}
+li{display:flex;justify-content:space-between;align-items:center;padding:1.4vh 2vw;background:var(--panel);
+   border:1px solid var(--line);border-radius:.8vh;font-size:4.8vh;transition:background .3s,border-color .3s}
+li .name{display:flex;align-items:center;gap:1.2vw}
+.picon{width:4.4vh;height:4.4vh;stroke:currentColor;fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;flex:none}
+li b{font-variant-numeric:tabular-nums;font-size:5.4vh}
+li.minor{font-size:3.2vh;color:var(--dim);padding:.8vh 2vw}
+li.minor .picon{width:3.2vh;height:3.2vh}
+li.minor b{font-size:3.4vh}
+li.on{background:linear-gradient(90deg,var(--gold),var(--gold2));color:#1a2a20;border-color:var(--gold)}
+li.iqomah-active{background:linear-gradient(90deg,var(--iqomah),#f0966c);color:#241209;border-color:var(--iqomah)}
+li.done{opacity:.4}
+footer{font-size:2.2vh;color:var(--dim);display:flex;justify-content:space-between;align-items:center}
+#locBtn{background:rgba(255,255,255,.06);border:1px solid var(--line);color:var(--dim);border-radius:1vh;
+  padding:.7vh 1.4vw;font-family:inherit;font-size:2.2vh;cursor:pointer}
+#locBtn:hover,#locBtn:focus{border-color:var(--gold);color:var(--gold2)}
+
+#ov{position:fixed;inset:0;background:rgba(6,22,18,.97);display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:2.6vh;z-index:20}
 #ov.show{display:flex}
-#ov .a{font-size:5vh;color:var(--dim)}
-#ov .b{font-size:17vh;font-weight:700;color:var(--alert)}
-#ov .c{font-size:4.4vh}
+#ov .ring{width:16vh;height:16vh;border-radius:50%;border:.6vh solid var(--gold);display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 6vh rgba(227,176,75,.35);animation:pulse 1.8s ease-in-out infinite}
+#ov.iqomah .ring{border-color:var(--iqomah);box-shadow:0 0 6vh rgba(228,113,58,.4)}
+#ov .ring svg{width:8vh;height:8vh;stroke:var(--gold);fill:none;stroke-width:1.4}
+#ov.iqomah .ring svg{stroke:var(--iqomah)}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+#ov .a{font-size:4.2vh;color:var(--dim);letter-spacing:.05em}
+#ov .b{font-size:14vh;font-weight:700;color:var(--alert)}
+#ov.iqomah .b{color:var(--iqomah)}
+#ov .c{font-size:4vh}
+#ov .d{font-size:5.6vh;font-variant-numeric:tabular-nums;color:var(--gold2)}
+#ov.iqomah .d{color:#f0966c}
+
+#locPanel{position:fixed;inset:0;background:rgba(6,22,18,.95);display:none;align-items:center;justify-content:center;z-index:30}
+#locPanel.show{display:flex}
+.loccard{background:var(--panel);border:1px solid var(--gold);border-radius:1.4vh;padding:3vh 3vw;width:min(60vw,720px);max-height:78vh;display:flex;flex-direction:column;gap:1.4vh}
+.loccard h2{margin:0 0 .6vh;font-size:3.4vh;color:var(--gold2)}
+.locgroup{font-size:2.2vh;color:var(--dim);margin-top:1vh;letter-spacing:.06em;text-transform:uppercase}
+.loclist{overflow-y:auto;display:flex;flex-direction:column;gap:.4vh;padding-right:.5vw}
+.locitem{padding:1.2vh 1.4vw;border-radius:.8vh;font-size:2.6vh;cursor:pointer;border:1px solid transparent}
+.locitem.sel{background:var(--gold);color:#1a2a20;border-color:var(--gold)}
+.lochint{font-size:1.9vh;color:var(--dim);text-align:center}
 </style>
 </head>
 <body>
-<header><h1>MASJID MAPPAJAJI</h1><span>Jadwal Sholat dan Kalender Hijriah</span></header>
+<header>
+  <div class="htitle">
+    <svg class="hicon" viewBox="0 0 24 24" stroke="#e3b04b" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 3a9 9 0 1 0 8 12.9A9 9 0 0 1 13 3Z"/>
+      <path d="M19 2.4l.5 1.4 1.4.5-1.4.5-.5 1.4-.5-1.4-1.4-.5 1.4-.5.5-1.4Z"/>
+    </svg>
+    <h1>IMAM MAPPAJAJI</h1>
+  </div>
+  <div class="sub">Jadwal Sholat &amp; Kalender Hijriah</div>
+</header>
 <main>
   <section class="left">
     <div id="clock">--:--<small>--</small></div>
     <div id="greg"></div>
     <div id="hijri"></div>
-    <div class="next"><div class="l">Sholat berikutnya</div><div class="n" id="nn">-</div><div class="c" id="nc">-</div></div>
+    <div class="statusbox" id="statusbox">
+      <div class="l" id="sl">Sholat berikutnya</div>
+      <div class="n" id="nn">-</div>
+      <div class="c" id="nc">-</div>
+    </div>
   </section>
   <ul id="list"></ul>
 </main>
-<footer><span id="loc"></span><span>Tekan OK / Enter untuk layar penuh</span></footer>
-<div id="ov"><div class="a">Telah masuk waktu</div><div class="b" id="ovn"></div><div class="c" id="ovt"></div></div>
+<footer>
+  <button id="locBtn">Lokasi: -</button>
+  <span>Tekan OK / Enter untuk layar penuh</span>
+</footer>
+
+<div id="ov">
+  <div class="ring"><svg id="ovicon" viewBox="0 0 24 24"><path d="M12 2v20M2 12h20"/></svg></div>
+  <div class="a" id="ova">Telah masuk waktu</div>
+  <div class="b" id="ovn"></div>
+  <div class="c" id="ovt"></div>
+  <div class="d" id="ovc"></div>
+</div>
+
+<div id="locPanel">
+  <div class="loccard">
+    <h2>Pilih Lokasi</h2>
+    <div class="loclist" id="locList"></div>
+    <div class="lochint">Panah atas/bawah untuk pilih, Enter untuk konfirmasi, Esc untuk batal</div>
+  </div>
+</div>
 
 <script>
-/* ===== PENGATURAN: ubah di sini ===== */
+/* ===== PENGATURAN DASAR ===== */
 const CFG = {
-  lokasi: "Makassar, Sulawesi Selatan",
-  lat: -5.1477, lng: 119.4327,   // ganti dengan koordinat masjid
-  tz: 8,                          // WITA = 8, WIB = 7, WIT = 9
+  tz: 8,                          // WITA=8, WIB=7, WIT=9
   sudutSubuh: 20, sudutIsya: 18,  // standar Kemenag RI
   ihtiyat: 2,                     // menit pengaman (Kemenag)
-  koreksiHijriah: 0,              // -1 / 0 / +1 hari, menyesuaikan sidang isbat
-  layarAdzan: 60,                 // detik tampilan pengumuman waktu sholat
-  suaraAdzan: true
+  koreksiHijriah: 0,              // -1 / 0 / +1 hari
+  adzanWindow: 300,               // 5 menit tampilan waktu adzan
+  iqomah: { Subuh:900, Dzuhur:600, Ashar:600, Maghrib:300, Isya:600 } // detik menuju iqomah
 };
-/* ===================================== */
+let loc = { name:"Sulawesi Selatan - Makassar", lat:-5.1477, lng:119.4327 };
+try{
+  const saved = JSON.parse(localStorage.getItem("mappajaji_loc"));
+  if(saved && saved.lat) loc = saved;
+}catch(e){}
+
+const LOCATIONS = [
+ {group:"Sulawesi Selatan (Kab/Kota)", items:[
+   {name:"Makassar", lat:-5.1477, lng:119.4327},
+   {name:"Gowa (Sungguminasa)", lat:-5.2192, lng:119.4497},
+   {name:"Maros", lat:-5.0027, lng:119.5736},
+   {name:"Takalar", lat:-5.4159, lng:119.4172},
+   {name:"Jeneponto", lat:-5.6353, lng:119.7311},
+   {name:"Bantaeng", lat:-5.5386, lng:119.9581},
+   {name:"Bulukumba", lat:-5.5479, lng:120.2100},
+   {name:"Kepulauan Selayar (Benteng)", lat:-6.1240, lng:120.4590},
+   {name:"Sinjai", lat:-5.1281, lng:120.2529},
+   {name:"Bone (Watampone)", lat:-4.5386, lng:120.3308},
+   {name:"Wajo (Sengkang)", lat:-4.0058, lng:120.0121},
+   {name:"Soppeng (Watansoppeng)", lat:-4.3480, lng:119.8781},
+   {name:"Barru", lat:-4.4192, lng:119.6203},
+   {name:"Pangkep (Pangkajene)", lat:-4.7900, lng:119.5750},
+   {name:"Parepare", lat:-4.0135, lng:119.6255},
+   {name:"Sidrap (Pangkajene Sidrap)", lat:-3.8672, lng:119.8467},
+   {name:"Pinrang", lat:-3.7864, lng:119.6469},
+   {name:"Enrekang", lat:-3.5721, lng:119.7844},
+   {name:"Tana Toraja (Makale)", lat:-3.0875, lng:119.8511},
+   {name:"Toraja Utara (Rantepao)", lat:-2.9700, lng:119.8994},
+   {name:"Luwu (Belopa)", lat:-3.0500, lng:120.3833},
+   {name:"Luwu Utara (Masamba)", lat:-2.5548, lng:120.3172},
+   {name:"Luwu Timur (Malili)", lat:-2.6333, lng:121.4167},
+   {name:"Palopo", lat:-2.9925, lng:120.1961}
+ ]},
+ {group:"Ibu Kota Provinsi Lain", items:[
+   {name:"Aceh - Banda Aceh", lat:5.5483, lng:95.3238},
+   {name:"Sumatera Utara - Medan", lat:3.5952, lng:98.6722},
+   {name:"Sumatera Barat - Padang", lat:-0.9471, lng:100.4172},
+   {name:"Riau - Pekanbaru", lat:0.5071, lng:101.4478},
+   {name:"Kepulauan Riau - Tanjungpinang", lat:0.9186, lng:104.4453},
+   {name:"Jambi - Jambi", lat:-1.6101, lng:103.6131},
+   {name:"Sumatera Selatan - Palembang", lat:-2.9761, lng:104.7754},
+   {name:"Bangka Belitung - Pangkalpinang", lat:-2.1316, lng:106.1169},
+   {name:"Bengkulu - Bengkulu", lat:-3.7928, lng:102.2608},
+   {name:"Lampung - Bandar Lampung", lat:-5.4292, lng:105.2610},
+   {name:"Banten - Serang", lat:-6.1200, lng:106.1503},
+   {name:"DKI Jakarta - Jakarta", lat:-6.2088, lng:106.8456},
+   {name:"Jawa Barat - Bandung", lat:-6.9175, lng:107.6191},
+   {name:"Jawa Tengah - Semarang", lat:-6.9932, lng:110.4203},
+   {name:"DI Yogyakarta - Yogyakarta", lat:-7.7956, lng:110.3695},
+   {name:"Jawa Timur - Surabaya", lat:-7.2575, lng:112.7521},
+   {name:"Bali - Denpasar", lat:-8.6705, lng:115.2126},
+   {name:"NTB - Mataram", lat:-8.5833, lng:116.1167},
+   {name:"NTT - Kupang", lat:-10.1772, lng:123.6070},
+   {name:"Kalimantan Barat - Pontianak", lat:-0.0263, lng:109.3425},
+   {name:"Kalimantan Tengah - Palangka Raya", lat:-2.2096, lng:113.9213},
+   {name:"Kalimantan Selatan - Banjarmasin", lat:-3.3186, lng:114.5944},
+   {name:"Kalimantan Timur - Samarinda", lat:-0.5022, lng:117.1536},
+   {name:"Kalimantan Utara - Tanjung Selor", lat:2.8385, lng:117.3676},
+   {name:"Sulawesi Utara - Manado", lat:1.4748, lng:124.8421},
+   {name:"Gorontalo - Gorontalo", lat:0.5435, lng:123.0568},
+   {name:"Sulawesi Tengah - Palu", lat:-0.8917, lng:119.8707},
+   {name:"Sulawesi Barat - Mamuju", lat:-2.6785, lng:118.8880},
+   {name:"Sulawesi Tenggara - Kendari", lat:-3.9985, lng:122.5130},
+   {name:"Maluku - Ambon", lat:-3.6954, lng:128.1814},
+   {name:"Maluku Utara - Sofifi", lat:0.7387, lng:127.9673},
+   {name:"Papua - Jayapura", lat:-2.5330, lng:140.7181},
+   {name:"Papua Barat - Manokwari", lat:-0.8615, lng:134.0620}
+ ]}
+];
+/* ================================ */
 
 const R = Math.PI/180, sin = d=>Math.sin(d*R), cos = d=>Math.cos(d*R), tan = d=>Math.tan(d*R);
 const acos = x=>Math.acos(Math.min(1,Math.max(-1,x)))/R, fix = (a,b)=>a-b*Math.floor(a/b);
@@ -70,6 +211,16 @@ const HARI = ["Ahad","Senin","Selasa","Rabu","Kamis","Jumat","Sabtu"];
 const BLN = ["Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember"];
 const HBLN = ["Muharam","Safar","Rabiulawal","Rabiulakhir","Jumadilawal","Jumadilakhir","Rajab","Syakban","Ramadan","Syawal","Zulkaidah","Zulhijah"];
 const p2 = n=>String(n).padStart(2,"0");
+
+const ICONS = {
+  Subuh:'<path d="M9 3a7 7 0 1 0 8.5 9.5A7 7 0 0 1 9 3Z"/><path d="M17 5.2l.4 1.1 1.1.4-1.1.4-.4 1.1-.4-1.1-1.1-.4 1.1-.4.4-1.1Z"/>',
+  Terbit:'<path d="M12 4v3M5.2 8.2l1 1M18.8 8.2l-1 1M4 18h16M8 18a4 4 0 0 1 8 0"/>',
+  Dzuhur:'<circle cx="12" cy="12" r="4"/><path d="M12 2.5v2.5M12 19v2.5M2.5 12h2.5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/>',
+  Ashar:'<circle cx="12" cy="14" r="4"/><path d="M12 5v3M5.3 9.3l1.8 1.8M18.7 9.3l-1.8 1.8M2 20h20"/>',
+  Maghrib:'<path d="M4 18h16M8 18a4 4 0 0 1 8 0M12 6v5M8.5 9.5l1.3 1.3M15.5 9.5l-1.3 1.3"/>',
+  Isya:'<path d="M15 4a7 7 0 1 0 5 11.9A7 7 0 0 1 15 4Z"/><path d="M19.5 3l.4 1.2 1.2.4-1.2.4-.4 1.2-.4-1.2-1.2-.4 1.2-.4.4-1.2Z"/><path d="M13 14.5l.3.9.9.3-.9.3-.3.9-.3-.9-.9-.3.9-.3.3-.9Z"/>'
+};
+function iconSvg(name){ return '<svg class="picon" viewBox="0 0 24 24">'+ICONS[name]+'</svg>'; }
 
 function hitung(d){
   const y=d.getFullYear(), m=d.getMonth()+1, dd=d.getDate();
@@ -80,9 +231,9 @@ function hitung(d){
   const L=fix(q+1.915*sin(g)+0.02*sin(2*g),360), e=23.439-3.6e-7*D;
   const ra=fix(Math.atan2(cos(e)*sin(L),cos(L))/R,360)/15;
   const eqt=q/15-ra, decl=Math.asin(sin(e)*sin(L))/R;
-  const noon=12+CFG.tz-CFG.lng/15-eqt;
-  const T=a=>acos((-sin(a)-sin(CFG.lat)*sin(decl))/(cos(CFG.lat)*cos(decl)))/15;
-  const asrA=-Math.atan(1/(1+tan(Math.abs(CFG.lat-decl))))/R;
+  const noon=12+CFG.tz-loc.lng/15-eqt;
+  const T=a=>acos((-sin(a)-sin(loc.lat)*sin(decl))/(cos(loc.lat)*cos(decl)))/15;
+  const asrA=-Math.atan(1/(1+tan(Math.abs(loc.lat-decl))))/R;
   const ih=CFG.ihtiyat/60, base=new Date(y,dd?m-1:0,dd);
   const at=h=>new Date(base.getTime()+Math.round(h*3600000));
   return {
@@ -101,57 +252,89 @@ function hijriah(now, maghrib){
 
 const WAJIB=["Subuh","Dzuhur","Ashar","Maghrib","Isya"];
 const list=document.getElementById("list");
-document.getElementById("loc").textContent=CFG.lokasi;
+document.getElementById("locBtn").textContent="Lokasi: "+loc.name;
 let hari="", jadwal=null, fired={};
+
+function buildRows(){
+  list.innerHTML="";
+  const rows=[["Subuh",0],["Terbit",1],["Dzuhur",0],["Ashar",0],["Maghrib",0],["Isya",0]];
+  rows.forEach(([n,minor])=>{
+    const li=document.createElement("li"); li.id="r-"+n; if(minor) li.className="minor";
+    const t=jadwal[n];
+    li.innerHTML='<span class="name">'+iconSvg(n)+n+'</span><b>'+p2(t.getHours())+":"+p2(t.getMinutes())+"</b>";
+    list.appendChild(li);
+  });
+}
 
 function render(now){
   const key=now.toDateString();
-  if(key!==hari){
-    hari=key; jadwal=hitung(now); fired={};
-    list.innerHTML="";
-    [["Subuh",0],["Terbit",1],["Dzuhur",0],["Ashar",0],["Maghrib",0],["Isya",0]].forEach(([n,minor])=>{
-      const li=document.createElement("li"); li.id="r-"+n; if(minor) li.className="minor";
-      const t=jadwal[n]; li.innerHTML="<span>"+n+"</span><b>"+p2(t.getHours())+":"+p2(t.getMinutes())+"</b>";
-      list.appendChild(li);
-    });
-  }
+  if(key!==hari){ hari=key; jadwal=hitung(now); fired={}; buildRows(); }
 }
+
+const OV_ICON = { adzan:'<path d="M12 2v20M2 12h20"/>', iqomah:'<path d="M12 6v6l4 4"/><circle cx="12" cy="12" r="9"/>' };
 
 function tick(){
   const now=new Date(); render(now);
-  const h=now.getHours();
-  document.getElementById("clock").innerHTML=p2(h)+":"+p2(now.getMinutes())+"<small>"+p2(now.getSeconds())+"</small>";
+  document.getElementById("clock").innerHTML=p2(now.getHours())+":"+p2(now.getMinutes())+"<small>"+p2(now.getSeconds())+"</small>";
   document.getElementById("greg").textContent=HARI[now.getDay()]+", "+now.getDate()+" "+BLN[now.getMonth()]+" "+now.getFullYear();
   document.getElementById("hijri").textContent=hijriah(now,jadwal.Maghrib);
 
-  let next=null;
-  for(const n of WAJIB){ if(jadwal[n]>now){next=n;break} }
-  let target;
-  if(next){target=jadwal[next]} else { next="Subuh"; const t=hitung(new Date(now.getTime()+86400000)); target=t.Subuh }
-  const s=Math.max(0,Math.floor((target-now)/1000));
-  document.getElementById("nn").textContent=next;
-  document.getElementById("nc").textContent="- "+p2(Math.floor(s/3600))+":"+p2(Math.floor(s%3600/60))+":"+p2(s%60);
+  // cari sholat yang sedang aktif (adzan / menunggu iqomah / baru iqomah)
+  let active=null, state="none", elapsed=0;
+  for(const n of WAJIB){
+    const el=(now-jadwal[n])/1000;
+    const gap=CFG.iqomah[n];
+    if(el>=0 && el<gap+15){ active=n; elapsed=el; state = el<CFG.adzanWindow?"adzan": el<gap?"wait":"iqomah"; }
+  }
 
-  let cur=null; for(const n of WAJIB){ if(jadwal[n]<=now) cur=n }
+  const ov=document.getElementById("ov"), box=document.getElementById("statusbox");
+  const sl=document.getElementById("sl"), nn=document.getElementById("nn"), nc=document.getElementById("nc");
+
+  if(active && state==="adzan"){
+    if(!fired[active+"a"]){ fired[active+"a"]=1; bunyi(); }
+    ov.className="show";
+    document.getElementById("ovicon").innerHTML=OV_ICON.adzan;
+    document.getElementById("ova").textContent="Telah masuk waktu";
+    document.getElementById("ovn").textContent=active;
+    document.getElementById("ovt").textContent="Imam Mappajaji - "+p2(jadwal[active].getHours())+":"+p2(jadwal[active].getMinutes());
+    const toIq=Math.max(0,Math.round(CFG.iqomah[active]-elapsed));
+    document.getElementById("ovc").textContent="Iqomah "+p2(Math.floor(toIq/60))+":"+p2(toIq%60);
+  } else if(active && state==="wait"){
+    ov.className="";
+    box.className="statusbox iqomah";
+    sl.textContent="Menunggu Iqomah";
+    nn.textContent=active;
+    const toIq=Math.max(0,Math.round(CFG.iqomah[active]-elapsed));
+    nc.textContent=p2(Math.floor(toIq/60))+":"+p2(toIq%60);
+  } else if(active && state==="iqomah"){
+    if(!fired[active+"i"]){ fired[active+"i"]=1; bunyi(); }
+    ov.className="show iqomah";
+    document.getElementById("ovicon").innerHTML=OV_ICON.iqomah;
+    document.getElementById("ova").textContent="Sholat didirikan";
+    document.getElementById("ovn").textContent="IQOMAH";
+    document.getElementById("ovt").textContent=active+" - Imam Mappajaji";
+    document.getElementById("ovc").textContent="";
+  } else {
+    ov.className=""; box.className="statusbox";
+    let next=null; for(const n of WAJIB){ if(jadwal[n]>now){next=n;break} }
+    let target;
+    if(next){target=jadwal[next]} else { next="Subuh"; target=hitung(new Date(now.getTime()+86400000)).Subuh; }
+    const s=Math.max(0,Math.floor((target-now)/1000));
+    sl.textContent="Sholat berikutnya"; nn.textContent=next;
+    nc.textContent="- "+p2(Math.floor(s/3600))+":"+p2(Math.floor(s%3600/60))+":"+p2(s%60);
+  }
+
   for(const n of ["Subuh","Terbit",...WAJIB.slice(1)]){
     const li=document.getElementById("r-"+n); if(!li) continue;
-    li.classList.toggle("on", n===next);
-    li.classList.toggle("done", jadwal[n]<=now && n!==next);
+    li.classList.remove("on","done","iqomah-active");
+    if(active===n && (state==="wait"||state==="iqomah")) li.classList.add("iqomah-active");
+    else if(active===n && state==="adzan") li.classList.add("on");
+    else if(!active){
+      let nx=null; for(const w of WAJIB){ if(jadwal[w]>now){nx=w;break} }
+      if(n===nx) li.classList.add("on");
+      else if(jadwal[n] && jadwal[n]<=now) li.classList.add("done");
+    } else if(jadwal[n] && jadwal[n]<=now) li.classList.add("done");
   }
-
-  /* pengumuman saat waktu sholat masuk */
-  const ov=document.getElementById("ov");
-  let showing=false;
-  for(const n of WAJIB){
-    const diff=(now-jadwal[n])/1000;
-    if(diff>=0 && diff<CFG.layarAdzan){
-      showing=true;
-      document.getElementById("ovn").textContent=n;
-      document.getElementById("ovt").textContent="Masjid Mappajaji - "+p2(jadwal[n].getHours())+":"+p2(jadwal[n].getMinutes());
-      if(!fired[n]){fired[n]=1; if(CFG.suaraAdzan) bunyi()}
-    }
-  }
-  ov.classList.toggle("show",showing);
 }
 
 function bunyi(){
@@ -168,12 +351,46 @@ function bunyi(){
   }catch(e){}
 }
 
-document.addEventListener("keydown",e=>{
+/* ---- panel lokasi ---- */
+const panel=document.getElementById("locPanel"), listEl=document.getElementById("locList");
+let flat=[], selIdx=0;
+LOCATIONS.forEach(g=>{
+  const h=document.createElement("div"); h.className="locgroup"; h.textContent=g.group; listEl.appendChild(h);
+  g.items.forEach(it=>{
+    const d=document.createElement("div"); d.className="locitem"; d.textContent=it.name;
+    d.onclick=()=>{ selIdx=flat.length; chooseLoc(it); };
+    listEl.appendChild(d);
+    flat.push({el:d,data:it});
+  });
+});
+function paintSel(){ flat.forEach((f,i)=>f.el.classList.toggle("sel", i===selIdx)); flat[selIdx] && flat[selIdx].el.scrollIntoView({block:"nearest"}); }
+function openPanel(){
+  selIdx = Math.max(0, flat.findIndex(f=>f.data.name===loc.name));
+  panel.classList.add("show"); paintSel();
+}
+function closePanel(){ panel.classList.remove("show"); }
+function chooseLoc(it){
+  loc = { name:it.name, lat:it.lat, lng:it.lng };
+  localStorage.setItem("mappajaji_loc", JSON.stringify(loc));
+  document.getElementById("locBtn").textContent="Lokasi: "+loc.name;
+  hari=""; closePanel();
+}
+document.getElementById("locBtn").addEventListener("click", openPanel);
+document.addEventListener("keydown", e=>{
+  if(panel.classList.contains("show")){
+    if(e.key==="ArrowDown"){ selIdx=Math.min(flat.length-1,selIdx+1); paintSel(); e.preventDefault(); }
+    else if(e.key==="ArrowUp"){ selIdx=Math.max(0,selIdx-1); paintSel(); e.preventDefault(); }
+    else if(e.key==="Enter"){ chooseLoc(flat[selIdx].data); e.preventDefault(); }
+    else if(e.key==="Escape"){ closePanel(); }
+    return;
+  }
+  if(e.key==="l"||e.key==="L"){ openPanel(); }
   if(e.key==="Enter"&&document.documentElement.requestFullscreen){
     document.fullscreenElement?document.exitFullscreen():document.documentElement.requestFullscreen().catch(()=>{});
   }
 });
 document.addEventListener("click",()=>{ if(document.documentElement.requestFullscreen&&!document.fullscreenElement) document.documentElement.requestFullscreen().catch(()=>{}) });
+
 tick(); setInterval(tick,1000);
 </script>
 </body>
